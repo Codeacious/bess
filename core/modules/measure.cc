@@ -50,11 +50,8 @@ static bool IsTimestamped(bess::Packet *pkt, size_t offset, uint64_t *time) {
     *time = *reinterpret_cast<uint64_t *>(marker + 1);
     return true;
   }
-  LOG_FIRST_N(ERROR, 10) << *marker << ' ' << Timestamp::kMarker;
   return false;
 }
-
-/* XXX: currently doesn't support multiple workers */
 
 const Commands Measure::cmds = {
     {"get_summary", "MeasureCommandGetSummaryArg",
