@@ -33,6 +33,7 @@
 
 #include <cstdint>
 #include <cstdlib>
+#include <limits>
 #include <vector>
 
 #include <glog/logging.h>
@@ -109,7 +110,8 @@ class Histogram {
 
           // Perform integer comparison first for the special case 100'th %-ile
           if (count_so_far < count_ &&
-              (count_so_far * 100.0) / count_ < *percentile_it) {
+              (count_so_far * 100.0) / count_ - *percentile_it <
+                  std::numeric_limits<double>::epsilon()) {
             break;
           }
 
